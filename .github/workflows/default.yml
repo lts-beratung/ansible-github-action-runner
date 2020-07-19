@@ -1,0 +1,28 @@
+---
+name: Molecule Test
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.7]
+
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          path: ansible-github-action-runner
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip3 install -r requirements.txt
+          ansible --version
+          molecule --version
+      - name: Test with molecule
+        run: |
+          molecule test --destroy=never --scenario-name ubuntu1804

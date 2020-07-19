@@ -1,0 +1,5 @@
+- import_tasks: "../includes/install.yml"
+  when: runner_action == "install"
+
+- import_tasks: "../includes/uninstall.yml"
+  when: runner_action == "uninstall"

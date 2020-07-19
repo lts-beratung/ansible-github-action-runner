@@ -1,0 +1,29 @@
+---
+# defaults file for ansible-github-action-runner
+
+# set to "install" to perform an installation, to "uninstall" to remove a runner
+runner_action: "install"
+
+# Define Github Actions Runner base download URL
+runner_download_base_url: https://github.com/actions/runner/releases/download
+
+# Define the Github Action Runner version to use:
+runner_version: 2.267.1
+
+# Define the name of the runner as it appears in github_deploy_key
+runner_config_name: my-runner
+
+# Define folder on disk where to store the runner
+runner_install_folder: /usr/lib/github-action-runner
+
+# Define the runner's workspace directory (i.e. that builds are using for checkout and stuff)
+runner_work_folder: /var/lib/github-action-runner
+
+# Define the Github Action Runner Repo or Organisation URL
+runner_config_repo_url: https://github.com/no-repo-set
+
+# Define the Github Action Runner tags for your runner (coma separated, no spaces)
+runner_config_labels: "ansible,IaS"
+
+# Define the Github Action Registration or Deletion token for your runner (default RUNNER_CONFIG_TOKEN from Linux env)
+runner_config_token: "{{ lookup('env','RUNNER_CONFIG_TOKEN') }}"

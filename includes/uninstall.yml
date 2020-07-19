@@ -1,0 +1,22 @@
+---
+- name: Deregister Runner
+  shell: |
+    {{ runner_install_folder }}/config.sh remove --token {{ runner_config_token }}
+  when: runner_config_token
+
+- name: Stop runner as service
+  shell: |
+    {{ runner_install_folder }}/svc.sh uninstall
+  become: true
+
+- name: Delete runner install folder
+  file:
+    state: absent
+    path: "{{ runner_install_folder }}/"
+  become: true
+
+- name: Delete runner workspace folder
+  file:
+    state: absent
+    path: "{{ runner_work_folder }}/"
+  become: true

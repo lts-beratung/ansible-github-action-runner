@@ -1,0 +1,4 @@
+## Features
+  - Initial version of Ansible Role
+  - Added molecule test
+  - Allowed `runner_config_token` to be sourced via OS env vars

@@ -1,0 +1,26 @@
+---
+galaxy_info:
+  author: LTS Beratung GmbH
+  description: Ansible Role to install GitHub Actions Runner as Service
+  license: MIT
+  min_ansible_version: 2.8
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - bionic
+        - precise
+        - trusty
+        - vivid
+        - wily
+        - xenial
+    - name: Debian
+      versions:
+        - jessie
+        - stretch
+        - wheezy
+
+  galaxy_tags:
+    - system
+    - github
+dependencies: []
