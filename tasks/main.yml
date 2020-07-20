@@ -1,5 +1,8 @@
 - import_tasks: "../includes/install.yml"
-  when: runner_action == "install"
+  when: runner_action.find("install") != -1
 
-- import_tasks: "../includes/uninstall.yml"
-  when: runner_action == "uninstall"
+- import_tasks: "../includes/configure.yml"
+  when: runner_action.find("configure") != -1
+
+- import_tasks: "../includes/remove.yml"
+  when: runner_action.find("remove") != -1

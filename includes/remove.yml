@@ -2,7 +2,8 @@
 - name: Deregister Runner
   shell: |
     {{ runner_install_folder }}/config.sh remove --token {{ runner_config_token }}
-  when: runner_config_token
+  ignore_errors: yes
+  when: runner_config_token | bool
 
 - name: Stop runner as service
   shell: |

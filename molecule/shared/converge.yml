@@ -2,8 +2,9 @@
 - name: Converge
   hosts: all
   vars:
-    runner_config_name: ubuntu-me
-    runner_config_labels: "label1,label2"
-    runner_token:
+    runner_action: "install"
+    runner_config_name: my_runner
+    runner_config_labels: "linux,x-large"
+    runner_config_token: 
   roles:
     - role: ansible-github-action-runner

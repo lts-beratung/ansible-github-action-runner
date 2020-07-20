@@ -2,9 +2,10 @@
 - name: Example Playbook for Github Action Runner install
   hosts: all
   vars:
-    runner_config_name: ubuntu-me
-    runner_config_repo_url: url
-    runner_config_labels: "label1,label2"
-    runner_config_token: atoken
+    runner_action: "install,configure"
+    runner_version: 2.267.1
+    runner_config_name: my_runner
+    runner_config_labels: "linux,x-large"
+    runner_config_token: <insert your GitHub Action Runner Registration Token>
   roles:
     - role: ansible-github-action-runner

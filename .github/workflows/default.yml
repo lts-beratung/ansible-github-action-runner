@@ -8,7 +8,6 @@ jobs:
       max-parallel: 4
       matrix:
         python-version: [3.7]
-
     steps:
       - uses: actions/checkout@v1
         with:
