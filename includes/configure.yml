@@ -1,11 +1,23 @@
 ---
+- name: Make file permissions ok
+  file:
+    path: "{{ runner_install_folder }}"
+    owner:  "{{ login_user }}"
+    recurse: yes
+    mode: 0755
+  become: true
+
 - name: Configure Runner
   shell: |
-    {{ runner_install_folder }}/config.sh --unattended --url {{ runner_config_repo_url }} --token {{ runner_config_token }} --name {{ runner_config_name }} --work {{ runner_work_folder }} --labels "{{ runner_config_labels | replace('', '-') }}"  --replace --runasservice
-  when: runner_config_token | bool
+    cd "{{ runner_install_folder }}"
+    {{ runner_install_folder }}/config.sh --unattended --url {{ runner_config_repo_url }} --token {{ runner_config_token }} --name {{ runner_config_name }} --work {{ runner_work_folder }} --labels {{ runner_config_labels | replace(' ', '-') }}  --replace 
+  when: runner_config_token|length > 0
+  become: true
+  become_user: "{{ login_user }}"
 
 - name: Run runner as service
   shell: |
+    cd "{{ runner_install_folder }}"
     {{ runner_install_folder }}/svc.sh install
-  when: runner_config_token | bool     
+  when: runner_config_token|length > 0    
   become: true

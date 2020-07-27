@@ -1,3 +1,16 @@
+- debug:
+    msg: Using action {{ runner_action }} with token {{ runner_config_token }} 
+
+- name: Run whoami to find out the current user
+  command: whoami
+  changed_when: false
+  become: false
+  register: whoami
+
+- name: Set a fact with the user name.
+  set_fact:
+    login_user: "{{ whoami.stdout }}"
+
 - import_tasks: "../includes/install.yml"
   when: runner_action.find("install") != -1
 

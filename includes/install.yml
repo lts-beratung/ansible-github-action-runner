@@ -1,13 +1,4 @@
 ---
-- name: Run whoami to find out the current user
-  command: whoami
-  changed_when: false
-  become: false
-  register: whoami
-
-- name: Set a fact with the user name.
-  set_fact:
-    login_user: "{{ whoami.stdout }}"
 
 - name: Download Runner Package
   get_url:
@@ -34,10 +25,17 @@
   shell: |
     tar xvf /tmp/actions-runner-{{ runner_version }}.tar.gz -C {{ runner_install_folder }}
   become: true
-
+  
 - name: Make file permissions ok
   file:
     path: "{{ runner_install_folder }}"
     owner:  "{{ login_user }}"
+    recurse: yes
     mode: 0755
   become: true
+
+- name: Install dependencies
+  shell: | 
+    cd "{{ runner_install_folder }}"
+    "{{ runner_install_folder }}/bin/installdependencies.sh"
+  become: true  
