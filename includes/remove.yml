@@ -2,6 +2,7 @@
 - name: Deregister Runner
   shell: |
     cd "{{ runner_install_folder }}"
+    [ -e /etc/profile ] && source /etc/profile
     {{ runner_install_folder }}/config.sh remove --token {{ runner_config_token }}
   ignore_errors: yes
   become_user: "{{ login_user }}"
