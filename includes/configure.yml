@@ -22,3 +22,11 @@
     {{ runner_install_folder }}/svc.sh install
   when: runner_config_token|length > 0    
   become: true
+
+- name: Start runner as service
+  shell: |
+    cd "{{ runner_install_folder }}"
+    {{ runner_install_folder }}/svc.sh start
+  when: runner_config_token|length > 0
+  become: true
+~
