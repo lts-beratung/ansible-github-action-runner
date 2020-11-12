@@ -14,7 +14,7 @@ runner_version: 2.267.1
 
 # Mandatory variables for runner_action: "configure"
 
-# Configure - Define the name of the runner as it appears in github_deploy_key 
+# Configure - Define the name of the runner as it appears in github_deploy_key
 runner_config_name: my-runner
 
 # Configure - Define folder on disk where to store the runner
@@ -31,3 +31,5 @@ runner_config_labels: "ansible,IaS"
 
 # Configure - Define the Github Action Registration or Deletion token for your runner (default RUNNER_CONFIG_TOKEN from Linux env)
 runner_config_token: "{{ lookup('env','RUNNER_CONFIG_TOKEN') }}"
+
+runner_env_settings: ""
