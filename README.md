@@ -1,5 +1,7 @@
 # Ansible Role GitHub Action Runner (self-hosted)
 
+[![awesome-runners](https://img.shields.io/badge/listed%20on-awesome--runners-blue.svg)](https://github.com/jonico/awesome-runners)
+
 Ansible Role to install and configure a self-hosted GitHub Actions Runner on a machine. Use this role to install, configure and even uninstall GitHub Action self-hosted runner aka build runners.
 
 Have a look at the official [GitHub Action self-hosted Runner documentation](https://docs.github.com/en/actions/reference/software-installed-on-github-hosted-runners) to figure out how things work.
