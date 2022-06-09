@@ -42,9 +42,9 @@
 - name: Copy mail-body-dot-dev.template
   copy:
     src: files/.env
-    dest: "/home/ubuntu/github-action-runner/install/.env"
+    dest: "{{ runner_install_folder }}/.env"
 
 - name: Append proxy variables
   lineinfile:
-    path: /home/ubuntu/github-action-runner/install/.env
+    path: "{{ runner_install_folder }}/.env"
     line: "{{ runner_env_settings }}"
