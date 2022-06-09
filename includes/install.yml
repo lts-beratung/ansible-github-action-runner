@@ -1,5 +1,4 @@
 ---
-
 - name: Download Runner Package
   get_url:
     url: "{{ runner_download_base_url }}/v{{ runner_version }}/actions-runner-linux-x64-{{ runner_version }}.tar.gz"
@@ -10,7 +9,7 @@
     path: "{{ runner_install_folder }}"
     state: directory
     owner: "{{ login_user }}"
-    mode: '0755'
+    mode: "0755"
   become: true
 
 - name: Create runner workspace folder
@@ -18,24 +17,34 @@
     path: "{{ runner_work_folder }}"
     state: directory
     owner: "{{ login_user }}"
-    mode: '0755'
+    mode: "0755"
   become: true
 
 - name: Unarchive Actions Runner package
   shell: |
     tar xvf /tmp/actions-runner-{{ runner_version }}.tar.gz -C {{ runner_install_folder }}
   become: true
-  
+
 - name: Make file permissions ok
   file:
     path: "{{ runner_install_folder }}"
-    owner:  "{{ login_user }}"
+    owner: "{{ login_user }}"
     recurse: yes
     mode: 0755
   become: true
 
 - name: Install dependencies
-  shell: | 
+  shell: |
     cd "{{ runner_install_folder }}"
     "{{ runner_install_folder }}/bin/installdependencies.sh"
-  become: true  
+  become: true
+
+- name: Copy mail-body-dot-dev.template
+  copy:
+    src: files/.env
+    dest: "{{ runner_install_folder }}/.env"
+
+- name: Append proxy variables
+  lineinfile:
+    path: "{{ runner_install_folder }}/.env"
+    line: "{{ runner_env_settings }}"
